@@ -49,7 +49,7 @@ $this->title = 'Expedições';
         color: #333;
         font-size: 36px;
         font-weight: 600;
-        margin-bottom: 30px;
+
         text-align: center;
         text-shadow: 2px 2px #1e90ff;
     }
@@ -60,14 +60,13 @@ $this->title = 'Expedições';
         display: block;
         font-size: 18px;
         font-weight: 600;
-        margin-bottom: 15px;
         width: 100%;
+        height: ;
     }
 
     .site-login input {
         border: none;
         border-radius: 5px;
-        padding: 10px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease-in-out;
     }
@@ -85,7 +84,7 @@ $this->title = 'Expedições';
         cursor: pointer;
         font-size: 18px;
         font-weight: 600;
-        padding: 10px;
+        padding: 8px;
         transition: all 0.3s ease-in-out;
         width: 100%;
     }
@@ -100,14 +99,13 @@ $this->title = 'Expedições';
 
     .site-login .help-block {
         color: #f00;
-        margin-top: 5px;
+
     }
 
     @media screen and (max-width: 576px) {
         .site-login {
-            margin: 30px 10px;
             max-width: none;
-            padding: 20px;
+            width: 300px;
         }
     }
 

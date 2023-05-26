@@ -1,16 +1,17 @@
 main > .container {
     padding: 70px 15px 20px;
+
 }
 
-.footer {
-    background-color: #f5f5f5;
-    font-size: .9em;
-    height: 60px;
+#footer {
+    background-color: #2776d5;
 }
 
-.footer > .container {
-    padding-right: 15px;
-    padding-left: 15px;
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; /* Footer height */
 }
 
 .not-set {
@@ -64,9 +65,9 @@ a.desc:after {
     color: rgba(255, 255, 255, 0.5);
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
     .nav li > form > button.logout {
-        display:block;
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 0;
@@ -90,6 +91,88 @@ a.desc:after {
 #navbarpoco a, #navbarpoco button {
     color: #ffffff;
     text-shadow: 2px 2px #000000;
+}
 
+.footer-buttons {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 41px;
+    z-index: 1;
+    right: 0;
+    left: 0;
+}
 
+.footer-buttons button {
+    margin-right: 1px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: transparent;
+    background: dodgerblue;
+    color: white;
+    border-radius: 1px;
+    margin-right: 1px;
+}
+
+.button:active {
+    transform: translate(0em, 0.2em);
+}
+
+.buttons-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons-center {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.content-center {
+    margin-top: 20px;
+}
+
+.content-bottom {
+    margin-top: 20px;
+    position: fixed;
+    bottom: 120px;
+}
+
+.status {
+    height: 20px;
+    width: 100%;
+    background-color: #6c6c6c;
+    border: 1px solid #1a1e21;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #ffffff;
+    overflow: hidden;
+    margin-top: 2px;
+    border: 1px solid #1a1e21;
+}
+
+.progress {
+    height: 100%;
+    background-color: #08ab08;
+    width: 0;
+    transition: width 0.5s ease-in-out;
+    border-radius: 0;
+}
+
+.leitura,
+.div-2000 {
+    display: flex;
+    margin-bottom: 5px;
+    gap: 5px;
+}
+
+#input-codigo-barras,
+#input-volume{
+    width: 100%;
 }
