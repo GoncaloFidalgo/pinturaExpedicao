@@ -4,7 +4,7 @@ main > .container {
 }
 
 #footer {
-    background-color: #2776d5;
+    background-color: #ec6c00;
 }
 
 #footer {
@@ -85,7 +85,7 @@ a.desc:after {
 }
 
 #navbarpoco {
-    background-color: #2776d5;
+    background-color: #ec6c00;
 }
 
 #navbarpoco a, #navbarpoco button {
@@ -101,14 +101,40 @@ a.desc:after {
     z-index: 1;
     right: 0;
     left: 0;
+    font-size: 13px;
+}
+a {
+    text-decoration: none;
+}
+.bootstrap-dialog-footer-buttons .btn-warning {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #0d6efd;
+    --bs-btn-border-color: #0d6efd;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0b5ed7;
+    --bs-btn-hover-border-color: #0a58ca;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #0a58ca;
+    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #0d6efd;
+    --bs-btn-disabled-border-color: #0d6efd;
 }
 
-.footer-buttons button {
-    margin-right: 1px;
+.modal-header {
+    background-color: #ff8000;
+    color: white;
+    font-weight: bold;
+    border-bottom: unset;
+}
+.footer-buttons .button {
+    padding: 8px 8px;
 }
 
 .button {
-    padding: 10px 20px;
+    padding: 5px 10px;
     border: transparent;
     background: dodgerblue;
     color: white;
@@ -173,6 +199,28 @@ a.desc:after {
 }
 
 #input-codigo-barras,
-#input-volume{
+#input-referencia,
+#input-obra,
+#input-des-id-pai,
+#input-funcionario,
+#input-volume {
     width: 100%;
+}
+
+#btn-lista {
+    display: flex;
+    justify-content: center;
+    width: 100% !important;
+}
+
+.menu-opcoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-opcoes .button {
+    width: 200px;
+    text-align: center;
 }

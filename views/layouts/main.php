@@ -6,6 +6,7 @@
 
 use app\assets\AppAsset;
 use app\widgets\Alert;
+use kartik\dialog\Dialog;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
@@ -19,6 +20,14 @@ $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, 
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
+if(Yii::$app->controller->id == 'volume'){
+    Yii::$app->name = 'Volume';
+    Yii::$app->homeUrl = '@web/volume';
+}
+if(Yii::$app->controller->id == 'pintura'){
+    Yii::$app->name = 'Pintura';
+    Yii::$app->homeUrl = '@web/pintura';
+}
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -44,8 +53,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
-                . Html::beginForm(['/site/logout'])
-                . Html::submitButton(
+                . Html::beginForm(['/site/logout'], 'POST', ['id' => 'form-logout'])
+                . Html::button(
                     'Logout',
                     ['class' => 'nav-link btn btn-link logout']
                 )
@@ -71,8 +80,20 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <div class="container">
     </div>
 </footer>
-
+<?= Dialog::widget(); ?>
 <?php $this->endBody() ?>
 </body>
 </html>
+<script>
+    $('.logout').click(function() {
+        krajeeDialog.confirm("Tem a certeza que quer sair da aplicação?", function (result) {
+            if (result) {
+                sessionStorage.clear();
+                $('#form-logout').submit();
+            } else {
+
+            }
+        });
+    });
+</script>
 <?php $this->endPage() ?>

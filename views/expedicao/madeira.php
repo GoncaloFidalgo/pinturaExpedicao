@@ -24,20 +24,19 @@ $soap = new \app\models\Soap();
             ],
             'columns' => [
                 'Referencia',
-                'Qtd',
-                'NumeroLista',
+                'Quantidade',
             ],
         ]);
     }
  ?>
-    <div style="margin-bottom: 100px"></div>
+<div style="margin-bottom: 100px"></div>
 </div>
 <script>
     var expedicao = JSON.parse(window.sessionStorage.getItem('expedicao'));
 
     $('#btn-lista').click(function () {
         if (expedicao){
-            window.location = 'listagem?n_expedicao=' + expedicao.N_Expedicao;
+            window.location = 'madeira?numeroExpedicao=' + expedicao.N_Expedicao;
         }else {
             swal.fire(
                 'Atenção!',

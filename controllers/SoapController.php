@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Soap;
 use SoapClient;
 use Yii;
+use yii\data\ArrayDataProvider;
 use yii\filters\AccessControl;
 use yii\helpers\Html;
 use yii\helpers\VarDumper;
@@ -89,7 +90,6 @@ class SoapController extends Controller
         if ($soap) { //out Int32 SerialNumber, out Int32 QtdTotal, out String DesIdPai
             $request = $soap->SetSerialNumberNewVersion(['serialNumber' => $serialNumber, 'NumeroColaborador' => $utilizador, 'numeroExpedicao' => $expedicao,
                 'Volume' => $Volume, 'isVolume' => $isVolume, 'SerialNumber' => 0, 'QtdTotal' => 0, 'DesIdPai' => '']);
-            Yii::debug($request);
             $response = [
                 'result' => $request->SetSerialNumberNewVersionResult,
                 'SerialNumber' => $request->SerialNumber,
@@ -140,4 +140,221 @@ class SoapController extends Controller
         }
     }
 
+    public function actionInserirVolumeId($num_obra, $Utilizador, $Local)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->InserirVolumeID(['num_obra' => $num_obra, 'Utilizador' => $Utilizador, 'Local' => $Local]);
+            return \yii\helpers\Json::encode($request->InserirVolumeIDResult);
+        }
+    }
+
+    public function actionImprimirEtiquetaLocal($num_obra, $numVolume, $Local)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->ImprimirEtiquetaLocal(['num_obra' => $num_obra, 'numVolume' => $numVolume, 'Local' => $Local]);
+            return \yii\helpers\Json::encode($request->ImprimirEtiquetaLocalResult);
+        }
+    }
+
+    public function actionGetNumeroTotalPecas($NumObra, $NumVolume)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->GetTotalNumeroPecas(['num_obra' => $NumObra, 'num_volume' => $NumVolume]);
+            return \yii\helpers\Json::encode($request->GetTotalNumeroPecasResult);
+        }
+    }
+
+    public function actionNumeroAros($NumObra, $NumVolume)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->NumeroAros(['NumObra' => $NumObra, 'NumVolumeLido' => $NumVolume]);
+            return \yii\helpers\Json::encode($request->NumeroArosResult);
+        }
+    }
+
+    public function actionSetAros($NumVolumeLido, $NumObra)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->SetAros(['NumObra' => $NumObra, 'NumVolumeLido' => $NumVolumeLido]);
+            return \yii\helpers\Json::encode($request->SetArosResult);
+        }
+    }
+
+    public function actionPalete($NumObra, $NumVolume)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->hasPalete(['NumObra' => $NumObra, 'NumVolumeLido' => $NumVolume]);
+            return \yii\helpers\Json::encode($request->hasPaleteResult);
+        }
+    }
+
+    public function actionSetPalete($NumVolumeLido, $NumObra, $Palete)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        Yii::debug($Palete);
+        if ($Palete == 'false') {
+            $Palete = 0;
+        }
+        if ($soap) {
+            $request = $soap->SetPalete(['NumVolumeLido' => $NumVolumeLido, 'NumObra' => $NumObra, 'Palete' => $Palete]);
+            return \yii\helpers\Json::encode($request->SetPaleteResult);
+        }
+    }
+
+    public function actionUpdateVolume($NumVolumeLido, $numVolumeaEncher, $NumObra)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->UpdateVolume(['NumVolumeLido' => $NumVolumeLido, 'numVolumeaEncher' => $numVolumeaEncher, 'NumObra' => $NumObra]);
+            return \yii\helpers\Json::encode($request->UpdateVolumeResult);
+        }
+    }
+
+    public function actionInserirPecasVolume($num_obra, $Utilizador, $Volume, $referencia, $multiplos)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->InserirPecasVolume([
+                'num_obra' => $num_obra,
+                'Utilizador' => $Utilizador,
+                'Volume' => $Volume,
+                'referencia' => $referencia,
+                'multiplos' => $multiplos,
+                'Outvolume' => 0,
+                'SerialNumber' => 0,
+                'QtdTotal' => 0,
+                'DesIdPai' => '',
+                'msg' => '',
+            ]);
+
+            $response = [
+                'result' => $request->InserirPecasVolumeResult,
+                'Outvolume' => $request->Outvolume,
+                'SerialNumber' => $request->SerialNumber,
+                'QtdTotal' => $request->QtdTotal,
+                'DesIdPai' => $request->DesIdPai,
+                'msg' => '',
+            ];
+            return \yii\helpers\Json::encode($response);
+        }
+    }
+
+    public function actionGetPecasIdPaisIntervalo($num_obra, $DesidPai, $idInicial, $idFinal)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->GetPecasIDPaisIntervalo(['num_obra' => $num_obra, 'DesidPai' => $DesidPai, 'idInicial' => $idInicial, 'idFinal' => $idFinal]);
+            return \yii\helpers\Json::encode($request->GetPecasIDPaisIntervaloResult);
+        }
+    }
+
+    public function actionGetFuncionario($Numero)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->GetFuncionario(['Numero' => $Numero]);
+            return \yii\helpers\Json::encode($request->GetFuncionarioResult);
+        }
+    }
+
+    public function actionInserirPrimario($NumeroFuncionario, $Lote, $referencia)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->InserirPrimario([
+                'NumeroFuncionario' => $NumeroFuncionario,
+                'Lote' => $Lote,
+                'referencia' => $referencia,
+            ]);
+
+            $response = [
+                'result' => $request->InserirPrimarioResult,
+                'SerialNumber' => $request->SerialNumber,
+                'QtdTotal' => $request->QtdTotal,
+                'DesIdPai' => $request->DesIdPai,
+            ];
+            return \yii\helpers\Json::encode($response);
+        }
+    }
+
+    public function actionInserirIntermedio($NumeroFuncionario, $Lote, $referencia)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->InserirIntermedio([
+                'NumeroFuncionario' => $NumeroFuncionario,
+                'Lote' => $Lote,
+                'referencia' => $referencia,
+            ]);
+            $response = [
+                'result' => $request->InserirIntermedioResult,
+                'SerialNumber' => $request->SerialNumber,
+                'QtdTotal' => $request->QtdTotal,
+                'DesIdPai' => $request->DesIdPai,
+            ];
+            return \yii\helpers\Json::encode($response);
+        }
+    }
+
+    public function actionInserirAcabamento($NumeroFuncionario, $Lote, $referencia)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->InserirAcabamento([
+                'NumeroFuncionario' => $NumeroFuncionario,
+                'Lote' => $Lote,
+                'referencia' => $referencia,
+            ]);
+            $response = [
+                'result' => $request->InserirAcabamentoResult,
+                'SerialNumber' => $request->SerialNumber,
+                'QtdTotal' => $request->QtdTotal,
+                'DesIdPai' => $request->DesIdPai,
+            ];
+            return \yii\helpers\Json::encode($response);
+        }
+    }
+
+    public function actionGetPecasIdPaisSerail($DesidPai)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->GetPecasIDPaisSerail([
+                'DesidPai' => $DesidPai,
+            ]);
+
+            return \yii\helpers\Json::encode($request->GetPecasIDPaisSerailResult);
+        }
+    }
+
+    public function actionLoteExiste($lote)
+    {
+        $soap = new Soap();
+        $soap = $soap->verifyUrl();
+        if ($soap) {
+            $request = $soap->LoteExiste(['lote' => $lote]);
+            return \yii\helpers\Json::encode($request->LoteExisteResult);
+        }
+    }
 }

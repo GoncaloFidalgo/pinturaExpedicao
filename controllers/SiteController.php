@@ -2,8 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\Utilizador;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -81,10 +83,13 @@ class SiteController extends Controller
             return $this->goBack();
         }
 
+        $data = ArrayHelper::map(Utilizador::find()
+            ->all(), 'nome', 'nome');
 
         $model->password = '';
         return $this->render('login', [
             'model' => $model,
+            'data' => $data,
         ]);
     }
 

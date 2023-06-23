@@ -3,11 +3,21 @@
 namespace app\models;
 
 use SoapClient;
+use Yii;
 
 class Soap
 {
-    public $url = 'http://localhost:51821/TwincatWs.asmx?WSDL';
+   // public $url = Yii::$app->params['soapURL'];
+    public $url = '';
 
+    function __construct() {
+        $this->url = Yii::$app->params['soapURL'];
+    }
+
+    public function init()
+    {
+        $url = $this->url;
+    }
     // Verificar se o URL é válido
     public function verifyUrl()
     {
@@ -23,4 +33,5 @@ class Soap
             return false;
         }
     }
+
 }

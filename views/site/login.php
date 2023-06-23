@@ -6,8 +6,10 @@
 /** @var app\models\LoginForm $model */
 
 use kartik\icons\Icon;
+use kartik\select2\Select2;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
+use yii\helpers\ArrayHelper;
 
 Icon::map($this);
 
@@ -32,7 +34,7 @@ $this->title = 'Expedições';
         z-index: -1;
     }
 
-    .site-login {
+    .site-login{
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -64,7 +66,7 @@ $this->title = 'Expedições';
         height: ;
     }
 
-    .site-login input {
+    .site-login input,{
         border: none;
         border-radius: 5px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -76,7 +78,7 @@ $this->title = 'Expedições';
         outline: none;
     }
 
-    .site-login button {
+    .site-login button, .pintura {
         background-color: #3CB1EA;
         border: none;
         border-radius: 5px;
@@ -89,7 +91,7 @@ $this->title = 'Expedições';
         width: 100%;
     }
 
-    .site-login button:hover {
+    .site-login button:hover , .pintura {
         background-color: #2493c8;
     }
 
@@ -101,6 +103,7 @@ $this->title = 'Expedições';
         color: #f00;
 
     }
+
 
     @media screen and (max-width: 576px) {
         .site-login {
@@ -125,11 +128,15 @@ $this->title = 'Expedições';
 
     <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Utilizador') ?>
 
+
     <?= $form->field($model, 'password')->passwordInput() ?>
 
     <div class="form-group">
         <div>
             <?= Html::submitButton('Login', ['name' => 'login-button', 'id' => 'cmdLogin']) ?>
+            <?= Html::button('Pintura', [ 'style' => 'margin-top:5px',
+                'onclick' => '(function ( $event ) { window.location = "../pintura" })();'
+            ]); ?>
         </div>
     </div>
 
